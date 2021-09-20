@@ -7,6 +7,7 @@ package erp.DAO;
 
 import erp.JDBC.ConnectionFactory;
 import erp.OBJECTS.Cliente;
+import erp.exceptions.ClienteException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,12 +15,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import erp.interfaces.DAO.IClienteDAO;
 
 /**
  *
  * @author Deyvid
  */
-public class ClientesDAO {
+public class ClientesDAO implements IClienteDAO {
 
     private Connection con;
 
@@ -28,6 +30,7 @@ public class ClientesDAO {
         
     }
 
+    @Override
     public void adicionarCliente(Cliente obj) {
         try {
             String sql = "insert into clientes (nome, rg, cpf, endereco, cep, cidade,"
@@ -50,6 +53,7 @@ public class ClientesDAO {
         }
     }    
 
+    @Override
     public void updateCliente(Cliente obj) {
         
         con = new ConnectionFactory().getConnection();
@@ -76,6 +80,7 @@ public class ClientesDAO {
         
     }
 
+    @Override
     public void deletarCliente(Cliente obj) {
         try {
             String sql = "delete from clientes where id=?";
@@ -90,6 +95,7 @@ public class ClientesDAO {
         }
     }
     
+    @Override
     public List<Cliente> listarClientes() {
         try {
             List<Cliente> lista = new ArrayList<>();

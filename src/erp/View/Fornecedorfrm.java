@@ -7,7 +7,9 @@ package erp.View;
 
 import erp.DAO.FornecedorDAO;
 import erp.OBJECTS.Fornecedor;
+import erp.servico.FornecedorServico;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -435,7 +437,8 @@ public class Fornecedorfrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btNOVOActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        Fornecedor obj = new Fornecedor();
+        try {
+            Fornecedor obj = new Fornecedor();
         obj.setNome(tfNome.getText());
         obj.setEndereco(tfENDERECO.getText());
         obj.setCidade(tfCIDADE.getText());
@@ -445,8 +448,15 @@ public class Fornecedorfrm extends javax.swing.JFrame {
         obj.setCnpj(ftCNPJ.getText());
         obj.setFone(ftFone.getText());
         obj.setEmail(tfEmail.getText());
-        FornecedorDAO dao = new FornecedorDAO();
-        dao.adicionarFornecedor(obj);
+        FornecedorServico fs = new FornecedorServico();
+        fs.adicionarFornecedor(obj);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO NO FORMULARIO BOTAO "+e);
+        }
+        
+        
+// FornecedorDAO dao = new FornecedorDAO();
+        //dao.adicionarFornecedor(obj);
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btEXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEXCLUIRActionPerformed
@@ -477,7 +487,8 @@ public class Fornecedorfrm extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaFornecedorMouseClicked
 
     private void btEDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEDITARActionPerformed
-        Fornecedor obj = new Fornecedor();
+        try {
+            Fornecedor obj = new Fornecedor();
 
         obj.setNome(tfNome.getText());
         obj.setEndereco(tfENDERECO.getText());
@@ -489,8 +500,13 @@ public class Fornecedorfrm extends javax.swing.JFrame {
         obj.setFone(ftFone.getText());
         obj.setEmail(tfEmail.getText());
         obj.setId(Integer.parseInt(tfCodigo.getText()));
-        FornecedorDAO dao = new FornecedorDAO();
-        dao.updateFornecedor(obj);
+        FornecedorServico fs = new FornecedorServico();
+        fs.updateFornecedor(obj);
+        } catch (Exception e) {
+        }
+        
+       // FornecedorDAO dao = new FornecedorDAO();
+        //dao.updateFornecedor(obj);
         
         
         

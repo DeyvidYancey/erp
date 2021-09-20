@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Deyvid/Documents/NetBeansProjects/erp/src/erp/DAO/FornecedorDAO.java</file>
-            <file>file:/C:/Users/Deyvid/Documents/NetBeansProjects/erp/src/erp/View/Fornecedorfrm1.java</file>
-            <file>file:/C:/Users/Deyvid/Documents/NetBeansProjects/erp/src/erp/View/Clientefrm.java</file>
-            <file>file:/C:/Users/Deyvid/Documents/NetBeansProjects/erp/src/erp/DAO/ClientesDAO.java</file>
-            <file>file:/C:/Users/Deyvid/Documents/NetBeansProjects/erp/src/erp/OBJECTS/Cliente.java</file>
-            <file>file:/C:/Users/Deyvid/Documents/NetBeansProjects/erp/src/erp/View/Fornecedorfrm.java</file>
+            <file>file:/C:/Users/Deyvid%20Yancey/Documents/NetBeansProjects/erp/src/erp/View/Fornecedorfrm.java</file>
+            <file>file:/C:/Users/Deyvid%20Yancey/Documents/NetBeansProjects/erp/src/erp/servico/ClienteServico.java</file>
+            <file>file:/C:/Users/Deyvid%20Yancey/Documents/NetBeansProjects/erp/src/erp/interfaces/DAO/IClienteDAO.java</file>
+            <file>file:/C:/Users/Deyvid%20Yancey/Documents/NetBeansProjects/erp/src/erp/servico/FornecedorServico.java</file>
+            <file>file:/C:/Users/Deyvid%20Yancey/Documents/NetBeansProjects/erp/src/erp/interfaces/DAO/IFornecedorDAO.java</file>
+            <file>file:/C:/Users/Deyvid%20Yancey/Documents/NetBeansProjects/erp/src/erp/interfaces/servico/IClienteServico.java</file>
         </group>
     </open-files>
 </project-private>

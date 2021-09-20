@@ -7,7 +7,10 @@ package erp.View;
 
 import erp.DAO.ClientesDAO;
 import erp.OBJECTS.Cliente;
+import erp.exceptions.ClienteException;
+import erp.servico.ClienteServico;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,6 +26,20 @@ public class Clientefrm extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void limparCampos() {
+        tfCodigo.setText("");
+        tfNome.setText("");
+        tfRG.setText("");
+        tfCIDADE.setText("");
+        ftCEP.setText("");
+        tfENDERECO.setText("");
+        ftCPF.setText("");
+        tfNUMERO.setText("");
+        tfBAIRRO.setText("");
+
+    }
+    
+    
     public void listar() {
         ClientesDAO dao = new ClientesDAO();
         List<Cliente> lista = dao.listarClientes();
@@ -399,11 +416,12 @@ public class Clientefrm extends javax.swing.JFrame {
     }//GEN-LAST:event_cbUFActionPerformed
 
     private void btNOVOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNOVOActionPerformed
-        // TODO add your handling code here:
+limparCampos();
     }//GEN-LAST:event_btNOVOActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        Cliente obj = new Cliente();
+        try {
+           Cliente obj = new Cliente();
         obj.setNome(tfNome.getText());
         obj.setRg(tfRG.getText());
         obj.setCidade(tfCIDADE.getText());
@@ -413,8 +431,15 @@ public class Clientefrm extends javax.swing.JFrame {
         obj.setUf(cbUF.getSelectedItem().toString());
         obj.setNumero(tfNUMERO.getText());
         obj.setCep(ftCEP.getText());
-        ClientesDAO dao = new ClientesDAO();
-        dao.adicionarCliente(obj);
+        ClienteServico cs = new ClienteServico();
+        cs.adicionarCliente(obj); 
+        } 
+        
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"ERRO NO FORMULARIO" + e);
+                }
+// ClientesDAO dao = new ClientesDAO();
+        //dao.adicionarCliente(obj);
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btEXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEXCLUIRActionPerformed
@@ -456,8 +481,10 @@ public class Clientefrm extends javax.swing.JFrame {
         obj.setNumero(tfNUMERO.getText());
         obj.setCep(ftCEP.getText());
         obj.setId(Integer.parseInt(tfCodigo.getText()));
-        ClientesDAO dao = new ClientesDAO();
-        dao.updateCliente(obj);
+        ClienteServico cs = new ClienteServico();
+        cs.updateCliente(obj);
+        //ClientesDAO dao = new ClientesDAO();
+        //dao.updateCliente(obj);
     }//GEN-LAST:event_btEDITARActionPerformed
 
     /**

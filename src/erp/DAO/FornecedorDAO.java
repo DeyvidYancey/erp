@@ -15,19 +15,22 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import erp.interfaces.DAO.IFornecedorDAO;
 
 /**
  *
  * @author Deyvid
  */
-public class FornecedorDAO {
+public class FornecedorDAO implements IFornecedorDAO {
     private Connection con;
     
     public FornecedorDAO(){
         this.con = new ConnectionFactory().getConnection();
     }
+
+    @Override
     public void adicionarFornecedor(Fornecedor obj) {
-        try {
+      try {
             String sql = "insert into fornecedor (nome, endereco, cidade, uf,cep, ie, cnpj,"
                     + "fone, email) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = con.prepareStatement(sql);
@@ -47,11 +50,12 @@ public class FornecedorDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro no metodo de adicionar" + e);
         }
-    }    
-
-     public void updateFornecedor(Fornecedor obj) {
         
-        con = new ConnectionFactory().getConnection();
+    }
+
+    @Override
+    public void updateFornecedor(Fornecedor obj) {
+ con = new ConnectionFactory().getConnection();
         try {
             String sql = "update fornecedor set nome = ?, endereco = ?, cidade = ? , uf = ?,cep = ?, ie = ?, cnpj = ?,"
                     + "fone = ?, email = ?  where id =?";
@@ -83,11 +87,11 @@ public class FornecedorDAO {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao editar Fornecedor" + e);
         }
-        
     }
 
+    @Override
     public void deletarFornecedor(Fornecedor obj) {
-        try {
+      try {
             String sql = "delete from fornecedor where id=?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, obj.getId());
@@ -97,11 +101,13 @@ public class FornecedorDAO {
             JOptionPane.showMessageDialog(null, "Excluido");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao deletar Fornecedor" + e);
-        }
+        }  
     }
-    
+
+    @Override
     public List<Fornecedor> listarFornecedor() {
-        try {
+     
+   try {
             List<Fornecedor> lista = new ArrayList<>();
             String sql = "Select * from fornecedor";
             PreparedStatement stm = con.prepareStatement(sql);
@@ -130,4 +136,6 @@ public class FornecedorDAO {
     
     
     
+
+
 }
