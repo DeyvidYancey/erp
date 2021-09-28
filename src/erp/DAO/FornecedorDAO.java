@@ -5,7 +5,6 @@
  */
 package erp.DAO;
 
-
 import erp.JDBC.ConnectionFactory;
 
 import erp.OBJECTS.Fornecedor;
@@ -22,20 +21,21 @@ import erp.interfaces.DAO.IFornecedorDAO;
  * @author Deyvid
  */
 public class FornecedorDAO implements IFornecedorDAO {
+
     private Connection con;
-    
-    public FornecedorDAO(){
+
+    public FornecedorDAO() {
         this.con = new ConnectionFactory().getConnection();
     }
 
     @Override
     public void adicionarFornecedor(Fornecedor obj) {
-      try {
+        try {
             String sql = "insert into fornecedor (nome, endereco, cidade, uf,cep, ie, cnpj,"
                     + "fone, email) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, obj.getNome());
-             stm.setString(2, obj.getEndereco());
+            stm.setString(2, obj.getEndereco());
             stm.setString(3, obj.getCidade());
             stm.setString(4, obj.getUf());
             stm.setString(5, obj.getCep());
@@ -43,19 +43,19 @@ public class FornecedorDAO implements IFornecedorDAO {
             stm.setString(7, obj.getCnpj());
             stm.setString(8, obj.getFone());
             stm.setString(9, obj.getEmail());
-            
+
             stm.execute();
             stm.close();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!!!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro no metodo de adicionar" + e);
         }
-        
+
     }
 
     @Override
     public void updateFornecedor(Fornecedor obj) {
- con = new ConnectionFactory().getConnection();
+        con = new ConnectionFactory().getConnection();
         try {
             String sql = "update fornecedor set nome = ?, endereco = ?, cidade = ? , uf = ?,cep = ?, ie = ?, cnpj = ?,"
                     + "fone = ?, email = ?  where id =?";
@@ -72,17 +72,7 @@ public class FornecedorDAO implements IFornecedorDAO {
             stm.setInt(10, obj.getId());
             stm.execute();
             stm.close();
-            
-            
-            
-            
-            
-        
-            
-            
-            
-            
-            
+
             JOptionPane.showMessageDialog(null, " Fornecedor alterado com sucesso");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao editar Fornecedor" + e);
@@ -91,28 +81,28 @@ public class FornecedorDAO implements IFornecedorDAO {
 
     @Override
     public void deletarFornecedor(Fornecedor obj) {
-      try {
+        try {
             String sql = "delete from fornecedor where id=?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, obj.getId());
-            
+
             stm.execute();
             stm.close();
             JOptionPane.showMessageDialog(null, "Excluido");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao deletar Fornecedor" + e);
-        }  
+        }
     }
 
     @Override
     public List<Fornecedor> listarFornecedor() {
-     
-   try {
+
+        try {
             List<Fornecedor> lista = new ArrayList<>();
             String sql = "Select * from fornecedor";
             PreparedStatement stm = con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 Fornecedor obj = new Fornecedor();
                 obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
@@ -125,17 +115,13 @@ public class FornecedorDAO implements IFornecedorDAO {
                 obj.setFone(rs.getString("fone"));
                 obj.setEmail(rs.getString("email"));
                 lista.add(obj);
-           
-            }            
-                 return lista;
-        } catch (Exception e) {
-         JOptionPane.showMessageDialog(null,"Erro ao listar Fornecedor " + e);
-        }
-      return null;
-    }
-    
-    
-    
 
+            }
+            return lista;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar Fornecedor " + e);
+        }
+        return null;
+    }
 
 }

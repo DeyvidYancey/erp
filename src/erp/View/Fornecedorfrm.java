@@ -503,6 +503,7 @@ public class Fornecedorfrm extends javax.swing.JFrame {
         FornecedorServico fs = new FornecedorServico();
         fs.updateFornecedor(obj);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"ERRO NO FORMULARIO EDITAR" + e);
         }
         
        // FornecedorDAO dao = new FornecedorDAO();

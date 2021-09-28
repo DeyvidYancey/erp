@@ -44,6 +44,8 @@ public class FornecedorServico implements IFornecedorServico {
             || "".equals(obj.getIe()) || "".equals(obj.getCnpj()) || "".equals(obj.getFone()) || "".equals(obj.getEmail()) ) {
          throw new FornecedorException("CERTIFIQUE-SE DE QUE NENHUM CAMPO ESTÁ EM BRANCO");
     }
+            FornecedorDAO dao = new FornecedorDAO();
+            dao.updateFornecedor(obj);
         } catch (Exception e) {
       JOptionPane.showMessageDialog(null,"ERRO AO EDITAR FORNECEDOR NO SERVIÇO" + e);
         }

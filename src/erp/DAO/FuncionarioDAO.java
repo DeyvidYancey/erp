@@ -6,35 +6,33 @@
 package erp.DAO;
 
 import erp.JDBC.ConnectionFactory;
-import erp.OBJECTS.Cliente;
-import erp.exceptions.ClienteException;
+import erp.OBJECTS.Funcionario;
+import erp.interfaces.DAO.IFuncionarioDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import erp.interfaces.DAO.IClienteDAO;
 
 /**
  *
- * @author Deyvid
+ * @author Deyvid Yancey
  */
-public class ClientesDAO implements IClienteDAO {
+public class FuncionarioDAO implements IFuncionarioDAO {
 
     private Connection con;
 
-    public ClientesDAO() {
+    public FuncionarioDAO() {
         this.con = new ConnectionFactory().getConnection();
-        
+
     }
 
     @Override
-    public void adicionarCliente(Cliente obj) {
+    public void adicionarFuncionario(Funcionario obj) {
         try {
-            String sql = "insert into clientes (nome, rg, cpf, endereco, cep, cidade,"
-                    + "uf, numero, bairro) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "insert into funcionario (nome, rg, cpf, endereco, cep, cidade,"
+                    + "uf, numero, bairro, login, senha, niveldeacesso) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, obj.getNome());
             stm.setString(2, obj.getRg());
@@ -45,48 +43,54 @@ public class ClientesDAO implements IClienteDAO {
             stm.setString(7, obj.getUf());
             stm.setString(8, obj.getNumero());
             stm.setString(9, obj.getBairro());
+            stm.setString(10, obj.getLogin());
+            stm.setString(11, obj.getSenha());
+            stm.setString(12, obj.getNivelDeAcesso());
             stm.execute();
             stm.close();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!!!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro no metodo de adicionar" + e);
         }
-    }    
+
+    }
 
     @Override
-    public void updateCliente(Cliente obj) {
-        
-        con = new ConnectionFactory().getConnection();
+    public void updateFuncionario(Funcionario obj) {
         try {
-            String sql = "update clientes set nome = ?, rg = ?, cpf = ? , endereco = ?, cep = ?, cidade = ?,"
-                    + "uf = ?, numero = ?, bairro = ? where id =?";
+            String sql = "update funcionario set nome = ?, rg =?, cpf=?, login =?, senha =?, nivelDeAcesso = ?, endereco=?, cep=?, cidade=?, uf=?, numero=?, bairro=? where id =?";
+
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setString(1, obj.getNome());
             stm.setString(2, obj.getRg());
             stm.setString(3, obj.getCpf());
-            stm.setString(4, obj.getEndereco());
-            stm.setString(5, obj.getCep());
-            stm.setString(6, obj.getCidade());
-            stm.setString(7, obj.getUf());
-            stm.setString(8, obj.getNumero());
-            stm.setString(9, obj.getBairro());
-            stm.setInt(10, obj.getId());
+            stm.setString(4, obj.getLogin());
+            stm.setString(5, obj.getSenha());
+            stm.setString(6, obj.getNivelDeAcesso());
+            stm.setString(7, obj.getEndereco());
+            stm.setString(8, obj.getCep());
+            stm.setString(9, obj.getCidade());
+            stm.setString(10, obj.getUf());
+            stm.setString(11, obj.getNumero());
+            stm.setString(12, obj.getBairro());
+            stm.setInt(13, obj.getId());
+
             stm.execute();
             stm.close();
-            JOptionPane.showMessageDialog(null, " Cliente alterado com sucesso");
+
+            JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao editar cliente" + e);
+            JOptionPane.showMessageDialog(null, "Erro ao alterar funcionario! " + e);
         }
-        
     }
 
     @Override
-    public void deletarCliente(Cliente obj) {
+    public void deletarFuncionario(Funcionario obj) {
         try {
-            String sql = "delete from clientes where id=?";
+            String sql = "delete from funcionario where id=?";
             PreparedStatement stm = con.prepareStatement(sql);
             stm.setInt(1, obj.getId());
-            
+
             stm.execute();
             stm.close();
             JOptionPane.showMessageDialog(null, "Excluido");
@@ -94,16 +98,16 @@ public class ClientesDAO implements IClienteDAO {
             JOptionPane.showMessageDialog(null, "Erro ao deletar cliente" + e);
         }
     }
-    
+
     @Override
-    public List<Cliente> listarClientes() {
+    public List<Funcionario> listarFuncionario() {
         try {
-            List<Cliente> lista = new ArrayList<>();
-            String sql = "Select * from clientes";
+            List<Funcionario> lista = new ArrayList<>();
+            String sql = "Select * from funcionario";
             PreparedStatement stm = con.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-            while (rs.next()) {                
-                Cliente obj = new Cliente();
+            while (rs.next()) {
+                Funcionario obj = new Funcionario();
                 obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
                 obj.setRg(rs.getString("rg"));
@@ -114,27 +118,29 @@ public class ClientesDAO implements IClienteDAO {
                 obj.setUf(rs.getString("uf"));
                 obj.setNumero(rs.getString("numero"));
                 obj.setBairro(rs.getString("bairro"));
+                obj.setLogin(rs.getString("login"));
+                obj.setSenha(rs.getString("senha"));
+                obj.setNivelDeAcesso(rs.getString("niveldeacesso"));
                 lista.add(obj);
-           
-            }            
-                 return lista;
+
+            }
+            return lista;
         } catch (Exception e) {
-         JOptionPane.showMessageDialog(null,"Erro ao listar clientes " + e);
+            JOptionPane.showMessageDialog(null, "Erro ao listar Funcionario " + e);
         }
-      return null;
+        return null;
     }
-    
-    
+
     @Override
-    public List<Cliente> buscarClientesPorNome(String nome){
+    public List<Funcionario> buscarFuncionarioPorNome(String nome) {
         try {
-           List<Cliente> lista = new ArrayList<>();
-           String sql = "Select * from clientes where nome like  ? ";
-           PreparedStatement stmt = con.prepareStatement(sql);
-           stmt.setString(1, nome);
-           ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {                
-                Cliente obj = new Cliente();
+            List<Funcionario> lista = new ArrayList<>();
+            String sql = "Select * from funcionario where nome like  ? ";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nome);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Funcionario obj = new Funcionario();
                 obj.setId(rs.getInt("id"));
                 obj.setNome(rs.getString("nome"));
                 obj.setRg(rs.getString("rg"));
@@ -145,17 +151,18 @@ public class ClientesDAO implements IClienteDAO {
                 obj.setUf(rs.getString("uf"));
                 obj.setNumero(rs.getString("numero"));
                 obj.setBairro(rs.getString("bairro"));
+                obj.setLogin(rs.getString("login"));
+                obj.setSenha(rs.getString("senha"));
+                obj.setNivelDeAcesso(rs.getString("niveldeacesso"));
                 lista.add(obj);
             }
-           
-             return lista;
-           
+
+            return lista;
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"ERRO AO PESQUISAR CLIENTE POR NOME NO DAO" +e);
-           return null;
+            JOptionPane.showMessageDialog(null, "ERRO AO PESQUISAR CLIENTE POR NOME NO DAO" + e);
+            return null;
         }
-         
     }
-    
-    
+
 }

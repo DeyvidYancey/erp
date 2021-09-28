@@ -19,7 +19,7 @@ public interface IClienteDAO {
     public void updateCliente (Cliente obj);
     public void deletarCliente (Cliente obj);
     public List<Cliente> listarClientes();
-    
+    public List<Cliente> buscarClientesPorNome(String nome);
     
     
 }
