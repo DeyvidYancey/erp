@@ -479,10 +479,10 @@ public class Produtofrm extends javax.swing.JFrame {
             obj.setPorcentagem(Double.parseDouble(tfPORCENTAGEM.getText()));
             obj.setTipo( cbTIPO.getSelectedItem().toString());
             //obj.setFornecedor(Integer.parseInt(tfFORNECEDOR.getText()));
-//ProdutoServico ps = new ProdutoServico();
-//ps.adicionarProduto(obj);
-            ProdutoDAO pd = new ProdutoDAO();
-            pd.adicionarProduto(obj);
+ProdutoServico ps = new ProdutoServico();
+ps.adicionarProduto(obj);
+            //ProdutoDAO pd = new ProdutoDAO();
+           // pd.adicionarProduto(obj);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO NO FORMULARIO" + e);
         }
@@ -529,11 +529,11 @@ public class Produtofrm extends javax.swing.JFrame {
         obj.setPorcentagem(Double.parseDouble(tfPORCENTAGEM.getText()));
         obj.setTipo(cbTIPO.getSelectedItem().toString());
         obj.setId(Integer.parseInt(tfCodigo.getText()));
-       // ProdutoServico ps = new ProdutoServico();
-        //ps.updateProduto(obj);
+        ProdutoServico ps = new ProdutoServico();
+        ps.updateProduto(obj);
         
- ProdutoDAO pd = new ProdutoDAO();
-       pd.updateProduto(obj); 
+ //ProdutoDAO pd = new ProdutoDAO();
+     //  pd.updateProduto(obj); 
         } catch (Exception e) {
         }
   

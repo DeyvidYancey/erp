@@ -15,8 +15,8 @@ import java.util.List;
  * @author Deyvid Yancey
  */
 public interface IFuncionarioServico  {
-     public void adicionarFornecedor(Funcionario obj)throws FuncionarioException;
-    public void updateFornecedor (Funcionario obj)throws FuncionarioException;
-    public void deletarFornecedor (Funcionario obj)throws FuncionarioException;
-    public List<Funcionario> listarFornecedor()throws FuncionarioException;
+     public void adicionarFuncionario  (Funcionario obj)throws FuncionarioException;
+    public void updateFuncionario (Funcionario obj)throws FuncionarioException;
+    public void deletarFuncionario  (Funcionario obj)throws FuncionarioException;
+    public List<Funcionario> listarFuncionario ()throws FuncionarioException;
 }

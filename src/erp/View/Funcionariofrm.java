@@ -11,6 +11,7 @@ import erp.OBJECTS.Cliente;
 import erp.OBJECTS.Funcionario;
 import erp.exceptions.ClienteException;
 import erp.servico.ClienteServico;
+import erp.servico.FuncionarioServico;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -529,7 +530,8 @@ public class Funcionariofrm extends javax.swing.JFrame {
     }//GEN-LAST:event_tabelaFuncionarioMouseClicked
 
     private void btEDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEDITARActionPerformed
-       Funcionario obj = new Funcionario();
+        try {
+        Funcionario obj = new Funcionario();
         
         obj.setNome(tfNome.getText());
         obj.setRg(tfENDERECO.getText());
@@ -544,8 +546,13 @@ public class Funcionariofrm extends javax.swing.JFrame {
         obj.setSenha(tfSENHA.getText());
         obj.setNivelDeAcesso(cbACESSO.getSelectedItem().toString());
         obj.setId(Integer.parseInt(tfCodigo.getText()));
-        FuncionarioDAO dao = new FuncionarioDAO();
-        dao.updateFuncionario(obj);
+        FuncionarioServico fs = new FuncionarioServico();
+        fs.adicionarFuncionario(obj);
+// FuncionarioDAO dao = new FuncionarioDAO();
+        //dao.updateFuncionario(obj);
+        } catch (Exception e) {
+        }
+       
       
     }//GEN-LAST:event_btEDITARActionPerformed
 

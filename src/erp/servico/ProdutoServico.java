@@ -21,8 +21,11 @@ public class ProdutoServico implements IProdutoServico {
     @Override
     public void adicionarProduto(Produto obj) throws ProdutoException {
  try {
-            if ("".equals(obj.getNome()) || "".equals(obj.getEstoque()) || "".equals(obj.getPrecoDeCompra()) || "".equals(obj.getTipo()) || "".equals(obj.getPrecoDeVenda())
-            || "".equals(obj.getPorcentagem()) || "".equals(obj.getId()) || "".equals(obj.getFornecedor())) {
+     
+    
+         
+     if ("".equals(obj.getNome()) || "".equals(obj.getEstoque()) || "".equals(obj.getPrecoDeCompra()) || "".equals(obj.getTipo()) || "".equals(obj.getPrecoDeVenda())
+            || "".equals(obj.getPorcentagem()) || "".equals(obj.getId()) || "".equals(obj.getFornecedor())|| "".equals(obj.getUnidade())) {
          throw new ProdutoException("CERTIFIQUE-SE DE QUE NENHUM CAMPO ESTÁ EM BRANCO");
             }
 
@@ -41,7 +44,7 @@ public class ProdutoServico implements IProdutoServico {
     public void updateProduto(Produto obj) throws ProdutoException {
         try {
             if ("".equals(obj.getNome()) || "".equals(obj.getEstoque()) || "".equals(obj.getPrecoDeCompra()) || "".equals(obj.getTipo()) || "".equals(obj.getPrecoDeVenda())
-            || "".equals(obj.getPorcentagem()) || "".equals(obj.getId()) || "".equals(obj.getFornecedor())) {
+            || "".equals(obj.getPorcentagem()) || "".equals(obj.getId()) || "".equals(obj.getFornecedor()) || "".equals(obj.getUnidade())) {
          throw new ProdutoException("CERTIFIQUE-SE DE QUE NENHUM CAMPO ESTÁ EM BRANCO");
             }
 
